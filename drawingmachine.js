@@ -71,6 +71,8 @@ function keyTyped() {
         loop();
     if (key == 'x')
         background(0);
+    if (key == 's')
+        save('myCanvas.png');
 } 
 
 function Particle(angle){
