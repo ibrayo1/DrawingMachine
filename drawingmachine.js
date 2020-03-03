@@ -24,8 +24,8 @@ function setup(){
     colorMode(HSB,255);
     //noStroke();
 
-    xcenter = width / 2;
-    ycenter = height / 2;
+    xcenter = random(100, 1600) / 2;
+    ycenter = random(100, 800) / 2;
     cen = createVector(xcenter, ycenter);
 
     // this generates three particles
@@ -56,13 +56,6 @@ function draw(){
     }
 }
 
-function followMouse(){
-    for(let i = 0; i < particles.length; i++){
-        particles[i].update2();
-        particles[i].show();
-    }
-}
-
 // pause drawing machine by pressing 'p' and 'r' to resume
 function keyTyped() { 
     if (key == 'p') 
@@ -73,12 +66,19 @@ function keyTyped() {
         background(0);
     if (key == 's')
         saveCanvas(cnv, 'myCanvas', 'png');
+    if (key == 'i')
+        radius+=1;
+    if (key == 'd')
+        radius-=1;
 } 
 
 function Particle(angle){
 
+    this.x; 
+    this.y;
+
     this.update = function(){
-        // Update the position of the shape
+        // Update the position of center of circular motion
         cen.x = cen.x + xspeed * xdirection;
         cen.y = cen.y + yspeed * ydirection;
 
@@ -90,6 +90,9 @@ function Particle(angle){
         if (cen.y > height - radius || cen.y < radius) {
             ydirection *= -1;
         }
+
+        this.x = cen.x + radius * cos(angle);
+        this.y = cen.y + radius * sin(angle);
     }
 
     // this function tells particles to move towards cursor
@@ -105,16 +108,18 @@ function Particle(angle){
 
         cen.add(target);
 
+        this.x = cen.x + radius * cos(angle);
+        this.y = cen.y + radius * sin(angle);
     }
 
     this.show = function(){
-        let x = cen.x + radius * cos(angle);
-        let y = cen.y + radius * sin(angle);
 
-        ellipse(x, y, 12, 12);
+        ellipse(cen.x, cen.y, 5, 5);
+        ellipse(this.x, this.y, 12, 12);
         angle = angle + speed;
         // change hue of the circle
         hue += 2;
         if (hue > 255) hue = 0;
+        
     }
 }
