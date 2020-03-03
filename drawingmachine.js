@@ -39,9 +39,6 @@ function setup(){
 function draw(){
     fill(hue, 255, 255);
 
-    // for debuging purposes
-    //ellipse(cen.x, cen.y, 5, 5);
-
     if(mouseX > 0 && mouseX < 1600 && mouseY > 0 && mouseY < 800){
         for(let i = 0; i < particles.length; i++){
             particles[i].update2();
@@ -53,6 +50,12 @@ function draw(){
             particles[i].update();
             particles[i].show();
         }
+    }
+
+    if (keyIsPressed && key == 'i') {
+        radius+=2;
+    } else if(keyIsPressed && key == 'd'){
+        radius-=2;
     }
 }
 
@@ -66,11 +69,7 @@ function keyTyped() {
         background(0);
     if (key == 's')
         saveCanvas(cnv, 'myCanvas', 'png');
-    if (key == 'i')
-        radius+=1;
-    if (key == 'd')
-        radius-=1;
-} 
+}
 
 function Particle(angle){
 
@@ -114,7 +113,9 @@ function Particle(angle){
 
     this.show = function(){
 
-        ellipse(cen.x, cen.y, 5, 5);
+        // uncomment for debuging
+        //ellipse(cen.x, cen.y, 5, 5);
+
         ellipse(this.x, this.y, 12, 12);
         angle = angle + speed;
         // change hue of the circle
