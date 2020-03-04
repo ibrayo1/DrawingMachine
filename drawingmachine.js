@@ -19,7 +19,7 @@ let cnv;
 let cen;
 
 function setup(){
-    cnv = createCanvas(1600, 800);
+    cnv = createCanvas(800, 800);
     cnv.parent('myContainer');
     colorMode(HSB,255);
     //noStroke();
@@ -33,10 +33,10 @@ function setup(){
         particles.push(new Particle(i));
     }
 
-    background(0);
 }
 
 function draw(){
+    background(0);
     fill(hue, 255, 255);
 
     if(mouseX > 0 && mouseX < 1600 && mouseY > 0 && mouseY < 800){
@@ -57,6 +57,10 @@ function draw(){
     } else if(keyIsPressed && key == 'd'){
         radius-=2;
     }
+    
+    // change hue of the circle
+    hue += 2;
+    if (hue > 255) hue = 0;
 }
 
 // pause drawing machine by pressing 'p' and 'r' to resume
@@ -65,14 +69,18 @@ function keyTyped() {
         noLoop();
     if (key == 'r')
         loop();
-    if (key == 'x')
-        background(0);
+    if (key == 'x'){
+        for(let i = 0; i< particles.length; i++){
+            particles[i].clearTail();
+        }
+    }
     if (key == 's')
         saveCanvas(cnv, 'myCanvas', 'png');
 }
 
 function Particle(angle){
 
+    this.tail = [];
     this.x; 
     this.y;
 
@@ -92,6 +100,11 @@ function Particle(angle){
 
         this.x = cen.x + radius * cos(angle);
         this.y = cen.y + radius * sin(angle);
+        this.tail.push(createVector(this.x, this.y));
+    }
+
+    this.clearTail = function(){
+        this.tail = [];
     }
 
     // this function tells particles to move towards cursor
@@ -109,6 +122,7 @@ function Particle(angle){
 
         this.x = cen.x + radius * cos(angle);
         this.y = cen.y + radius * sin(angle);
+        this.tail.push(createVector(this.x, this.y));
     }
 
     this.show = function(){
@@ -116,11 +130,13 @@ function Particle(angle){
         // uncomment for debuging
         //ellipse(cen.x, cen.y, 5, 5);
 
-        ellipse(this.x, this.y, 12, 12);
+        // randomly giggles the particles
+        for(let i = 0; i < this.tail.length; i++){
+            ellipse(this.tail[i].x+=random(-0.5,0.5), this.tail[i].y+=random(-0.5,0.5), 12, 12);
+        }
+
+        //ellipse(this.x, this.y, 12, 12);
         angle = angle + speed;
-        // change hue of the circle
-        hue += 2;
-        if (hue > 255) hue = 0;
         
     }
 }
