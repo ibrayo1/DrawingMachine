@@ -132,7 +132,7 @@ function Particle(angle){
 
         // randomly giggles the particles
         for(let i = 0; i < this.tail.length; i++){
-            ellipse(this.tail[i].x+=random(-0.5,0.5), this.tail[i].y+=random(-0.5,0.5), 12, 12);
+            ellipse(this.tail[i].x+=random(-0.6,0.6), this.tail[i].y+=random(-0.6,0.6), 12, 12);
         }
 
         //ellipse(this.x, this.y, 12, 12);
