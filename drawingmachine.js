@@ -32,7 +32,7 @@ function setup(){
     for(let i = 0; i < 270; i+=90){
         particles.push(new Particle(i));
     }
-    
+
     background(0);
 
 }
@@ -76,6 +76,12 @@ function keyTyped() {
             particles[i].clearTail();
         }
         background(0);
+    }
+    if(key == 'a'){
+        particles.push(new Particle(random(0, 270)));
+    }
+    if(key == 'q'){
+        particles.pop();
     }
     if (key == 's')
         saveCanvas(cnv, 'myCanvas', 'png');
