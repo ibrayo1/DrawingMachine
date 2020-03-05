@@ -24,8 +24,8 @@ function setup(){
     colorMode(HSB,255);
     //noStroke();
 
-    xcenter = random(100, 1600) / 2;
-    ycenter = random(100, 800) / 2;
+    xcenter = random(100, 700) / 2;
+    ycenter = random(100, 700) / 2;
     cen = createVector(xcenter, ycenter);
 
     // this generates three particles
