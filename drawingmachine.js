@@ -32,6 +32,8 @@ function setup(){
     for(let i = 0; i < 270; i+=90){
         particles.push(new Particle(i));
     }
+    
+    background(0);
 
 }
 
