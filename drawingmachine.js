@@ -36,7 +36,7 @@ function setup(){
 }
 
 function draw(){
-    background(0);
+    //background(0);
     fill(hue, 255, 255);
 
     if(mouseX > 0 && mouseX < 1600 && mouseY > 0 && mouseY < 800){
@@ -131,11 +131,11 @@ function Particle(angle){
         //ellipse(cen.x, cen.y, 5, 5);
 
         // randomly giggles the particles
-        for(let i = 0; i < this.tail.length; i++){
-            ellipse(this.tail[i].x+=random(-0.6,0.6), this.tail[i].y+=random(-0.6,0.6), 12, 12);
-        }
+        // for(let i = 0; i < this.tail.length; i++){
+        //     ellipse(this.tail[i].x+=random(-0.6,0.6), this.tail[i].y+=random(-0.6,0.6), 12, 12);
+        // }
 
-        //ellipse(this.x, this.y, 12, 12);
+        ellipse(this.x, this.y, 12, 12);
         angle = angle + speed;
         
     }
