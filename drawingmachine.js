@@ -73,7 +73,7 @@ function keyTyped() {
         for(let i = 0; i< particles.length; i++){
             particles[i].clearTail();
         }
-        background(0);
+        background(255);
     }
     if (key == 's')
         saveCanvas(cnv, 'myCanvas', 'png');
